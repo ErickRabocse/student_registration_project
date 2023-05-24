@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,100&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Liceo Student Services</title>
+  </head>
+  <body>
+    <!--CONTAINER THAT WILL CENTER THE MAIN CONTAINER -->
+    <div class="outside_container">
+      <!-- CONTAINER THAT HOLDS EVERYTHING -->
+      <main class="main_container">
+        <!-- LOGO AREA (GRID) -->
+        <header class="school_logo">
+          <h1>Liceo College</h1>
+        </header>
+        <!-- STUDENT REGISTRATION AREA (GRID) -->
+        <aside class="student_enrollment">
+          <h2>Student registration</h2>
+          <form action="" id="enrollment_form">
+            <label for="student_name">First name</label>
+            <input type="text" id="student_name" name="student_name" />
+            <label for="student_surname">Surname</label>
+            <input type="text" id="student_surname" name="student_surname" />
+            <label for="student_age">Age</label>
+            <input
+              type="text"
+              id="student_age"
+              name="student_age"
+              placeholder="Digits only"
+            />
+          </form>
+        </aside>
+        <!-- SEARCH STUDENT AREA (GRID) -->
+        <section class="student_search">
+          <h2>Register grades</h2>
+          <div class="student_search_form">
+            <label for="">Student name</label>
+            <input type="text" />
+          </div>
+          <div class="student_search_result">
+            <img src="" alt="" />
+            <div class="student_info">
+              <span class="name_display">DINAMIC NAME IN JS</span>
+              <span class="surname_display">DINAMIC SURNAME IN JS</span>
+            </div>
+          </div>
+        </section>
+        <!-- UPLOAD GRADES AREA (GRID) -->
+        <section class="student_grading">
+          <h2>Spring term classes</h2>
+          <form action="" id="student_grades">
+            <label for="language_arts">Language Arts</label>
+            <input type="number" id="language_arts" name="language_arts" />
+            <label for="maths">Maths</label>
+            <input type="number" id="maths" name="maths" />
+            <label for="p_e">P.E.</label>
+            <input type="number" id="p_e" name="p_e" />
+            <label for="science">Science</label>
+            <input type="number" id="science" name="science" />
+            <label for="spanish">Spanish</label>
+            <input type="number" id="spanish" nspanishame="spanish" />
+          </form>
+        </section>
+        <!-- FULL LIST AREA (GRID) -->
+        <section class="list_display">
+          <h2>List of students</h2>
+          <div class="list_display_form">
+            <h3>Arrange list by:</h3>
+            <label for="highest">highest grade</label>
+            <input type="checkbox" name="highest" id="highest" />
+            <label for="lowest">lowest grade</label>
+            <input type="checkbox" name="lowest" id="lowest" />
+            <label for="highest">highest grade</label>
+            <input type="checkbox" name="highest" id="highest" />
+            <label for="first">first name</label>
+            <input type="checkbox" name="first" id="first" />
+            <label for="last">last name</label>
+            <input type="checkbox" name="last" id="last" />
+            <label for="id">ID</label>
+            <input type="checkbox" name="id" id="id" />
+          </div>
+          <div class="list_display_container"></div>
+        </section>
+      </main>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>

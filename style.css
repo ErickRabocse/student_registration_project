@@ -1,0 +1,47 @@
+/* RESETS */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* GENERAL */
+body {
+  font-family: "Lato", sans-serif;
+}
+
+/* MAIN CONTAINER */
+.main_container {
+  display: grid;
+  grid-template-areas:
+    "logo search_student upload_grades"
+    "student_registration full_list full_list";
+}
+
+/* GRID AREAS */
+.school_logo {
+  grid-area: logo;
+}
+.student_enrollment {
+  grid-area: student_registration;
+}
+.student_search {
+  grid-area: search_student;
+}
+.student_grading {
+  grid-area: upload_grades;
+}
+
+.list_display {
+  grid-area: full_list;
+}
+
+.school_logo,
+.student_enrollment,
+.student_search,
+.student_grading,
+.list_display {
+  border: 1px solid grey;
+}
