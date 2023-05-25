@@ -15,6 +15,8 @@ body {
 /* MAIN CONTAINER */
 .main_container {
   display: grid;
+  grid-template-columns: 20% 30% 50%;
+  grid-template-rows: 200px auto;
   grid-template-areas:
     "logo search_student upload_grades"
     "student_registration full_list full_list";
@@ -23,15 +25,42 @@ body {
 /* GRID AREAS */
 .school_logo {
   grid-area: logo;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
 }
 .student_enrollment {
   grid-area: student_registration;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
 }
 .student_search {
   grid-area: search_student;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.student_search > h2 {
+  margin-top: 20px;
 }
 .student_grading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 20px;
+}
+.student_grading_form {
   grid-area: upload_grades;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  row-gap: 5px;
 }
 
 .list_display {
@@ -44,4 +73,40 @@ body {
 .student_grading,
 .list_display {
   border: 1px solid grey;
+}
+
+/* ENROLLMENT REGISTRATION */
+.enrollment_label {
+  display: block;
+  margin: 5px 0 2px 0;
+}
+
+/* HEADINGS */
+h2 {
+  margin-bottom: 15px;
+}
+/* INPUTS */
+input {
+  padding: 3px;
+}
+.student_enrollment_btn {
+  display: block;
+  margin-top: 20px;
+}
+
+.student_search_form > input {
+  width: 200px;
+}
+
+.student_search_result {
+  display: flex;
+  margin: 15px 0;
+}
+
+.student_info {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 10px;
 }
