@@ -131,6 +131,7 @@ input {
   border-radius: 3px;
 }
 
+.upload_grades_btn,
 .student_enrollment_btn {
   display: block;
   margin-top: 20px;
@@ -141,6 +142,7 @@ input {
   border: 1px solid lightblue;
   border-radius: 15px;
 }
+.upload_grades_btn:hover,
 .student_enrollment_btn:hover {
   background-color: var(--h-color);
   color: white;
