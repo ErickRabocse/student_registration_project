@@ -7,16 +7,41 @@
   box-sizing: border-box;
 }
 
+/* VARIABLES */
+:root {
+  --bg-left-color: rgba(63, 205, 224, 0.068);
+  --bg-right-color: rgba(55, 72, 79, 0.109);
+  --h-color: rgb(33, 187, 213);
+}
+/* COLORS */
+.school_logo,
+.student_enrollment {
+  background-color: var(--bg-left-color);
+}
+#student_name,
+#student_surname,
+#student_age {
+  background-color: white;
+}
 /* GENERAL */
 body {
   font-family: "Lato", sans-serif;
 }
 
+/* OUTSIDE CONTAINER */
+.outside_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 /* MAIN CONTAINER */
 .main_container {
+  border: 1px solid lightblue;
+
   display: grid;
+  width: 1200px;
   grid-template-columns: 20% 30% 50%;
-  grid-template-rows: 200px auto;
   grid-template-areas:
     "logo search_student upload_grades"
     "student_registration full_list full_list";
@@ -44,17 +69,16 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-color: var(--bg-right-color);
 }
 
-.student_search > h2 {
-  margin-top: 20px;
-}
 .student_grading {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  margin: 20px;
+  padding: 20px;
+  background-color: var(--bg-right-color);
 }
 .student_grading_form {
   grid-area: upload_grades;
@@ -63,16 +87,29 @@ body {
   row-gap: 5px;
 }
 
+/* STUDENTS LIST AREA */
 .list_display {
   grid-area: full_list;
+  padding: 20px;
+}
+.list_display_form {
+  text-align: center;
+}
+.list_display_form > h3 {
+  margin-bottom: 10px;
+  color: var(--h-color);
 }
 
-.school_logo,
-.student_enrollment,
-.student_search,
-.student_grading,
-.list_display {
-  border: 1px solid grey;
+input[type="radio"] {
+  margin-left: 3px;
+  margin-right: 15px;
+}
+
+.list_display_container {
+  margin-top: 20px;
+  width: 100%;
+  min-height: 20px;
+  background-color: var(--bg-right-color);
 }
 
 /* ENROLLMENT REGISTRATION */
@@ -83,19 +120,35 @@ body {
 
 /* HEADINGS */
 h2 {
-  margin-bottom: 15px;
+  margin: 20px auto;
+  color: var(--h-color);
 }
 /* INPUTS */
 input {
   padding: 3px;
+  background-color: aliceblue;
+  border: 1px solid lightgray;
+  border-radius: 3px;
 }
+
 .student_enrollment_btn {
   display: block;
   margin-top: 20px;
+  background-color: white;
+  color: var(--h-color);
+  padding: 8px;
+  font-weight: bold;
+  border: 1px solid lightblue;
+  border-radius: 15px;
 }
-
+.student_enrollment_btn:hover {
+  background-color: var(--h-color);
+  color: white;
+  cursor: pointer;
+}
 .student_search_form > input {
   width: 200px;
+  margin-left: 5px;
 }
 
 .student_search_result {
