@@ -131,4 +131,9 @@ function uploadGrades(e) {
       console.log(student);
     }
   });
+  //Saving in localStorage all changes
+  localStorage.setItem("students", JSON.stringify(studentsArray));
+  //Cleaning grades form
+  let student_grades_form = document.querySelector("#student_grades");
+  student_grades_form.reset();
 }
