@@ -121,12 +121,14 @@ function uploadGrades(e) {
   );
   console.log(studentGrades);
   //Accessing local storage to add the object CLASSES as an attribute to the object STUDENT
+  let name = document.querySelector(".name_display").innerText.toLowerCase();
+  let surname = document
+    .querySelector(".surname_display")
+    .innerText.toLowerCase();
   studentsArray.find((student) => {
-    let name = document.querySelector(".name_display").value;
-    let surname = document.querySelector(".surname_display").value;
-    console.log(name, surname);
     if (student.name === name && student.surname === surname) {
-      console.log("It's me");
+      student.subjects = studentGrades;
+      console.log(student);
     }
   });
 }
