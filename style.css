@@ -131,10 +131,11 @@ input {
   border-radius: 3px;
 }
 
+.student_search_btn,
 .upload_grades_btn,
 .student_enrollment_btn {
   display: block;
-  margin-top: 20px;
+  margin-top: 10px;
   background-color: white;
   color: var(--h-color);
   padding: 8px;
@@ -142,14 +143,15 @@ input {
   border: 1px solid lightblue;
   border-radius: 15px;
 }
+.student_search_btn:hover,
 .upload_grades_btn:hover,
 .student_enrollment_btn:hover {
   background-color: var(--h-color);
   color: white;
   cursor: pointer;
 }
-.student_search_form > input {
-  width: 200px;
+.student_search_input {
+  width: 150px;
   margin-left: 5px;
 }
 
