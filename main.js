@@ -46,8 +46,6 @@ function enroll(e) {
     student_age.value.toLowerCase()
   );
 
-  console.log(student.name);
-
   studentsArray.push(student);
   localStorage.setItem("students", JSON.stringify(studentsArray));
   enrollment_form.reset();
@@ -60,6 +58,9 @@ student_search_btn.addEventListener("click", search);
 
 function search(e) {
   e.preventDefault();
+  //ASSIGNNING PHOTO TO STUDENT
+  const user_image = document.querySelector(".user_image");
+
   //GETTING USERS FROM LOCAL STORAGE
   let students = localStorage.getItem("students");
   if (students === null) {
@@ -72,6 +73,13 @@ function search(e) {
     let fullInputName = student_search_input.value.toLowerCase();
     let fullName = `${student.name} ${student.surname}`;
     if (fullName === fullInputName) {
+      user_image.innerHTML = `<img src="./images/${student.name}.jpeg" width="100px">`;
+      language_arts_grade.value = student.subjects.language_arts;
+      maths_grade.value = student.subjects.maths;
+      p_e_grade.value = student.subjects.p_e;
+      science_grade.value = student.subjects.science;
+      spanish_grade.value = student.subjects.spanish;
+
       return student;
     }
   });
@@ -119,7 +127,6 @@ function uploadGrades(e) {
     parseInt(science_grade.value),
     parseInt(spanish_grade.value)
   );
-  console.log(studentGrades);
   //Accessing local storage to add the object CLASSES as an attribute to the object STUDENT
   let name = document.querySelector(".name_display").innerText.toLowerCase();
   let surname = document
@@ -128,7 +135,6 @@ function uploadGrades(e) {
   studentsArray.find((student) => {
     if (student.name === name && student.surname === surname) {
       student.subjects = studentGrades;
-      console.log(student);
     }
   });
   //Saving in localStorage all changes
@@ -137,3 +143,74 @@ function uploadGrades(e) {
   let student_grades_form = document.querySelector("#student_grades");
   student_grades_form.reset();
 }
+
+//* * * * * Getting SS AVERAGE & storing them into an array* * * * *
+const studentAverage = () => {
+  //ACCESSING LOCAL STORAGE
+  let students = localStorage.getItem("students");
+  if (students === null) {
+    studentsArray = [];
+  } else {
+    studentsArray = JSON.parse(students);
+  }
+  //RETURNNING THE AVERAGE FOR THE SS SELECTED
+  const average_grades = studentsArray.map(function (student) {
+    let total = 0;
+    let clases_total = 0;
+    if (student.subjects) {
+      for (let classes in student.subjects) {
+        clases_total++;
+        total += student.subjects[classes];
+      }
+    }
+    return total / clases_total;
+  });
+  return average_grades;
+};
+studentAverage();
+
+//* * * * * Display list of students * * * * *
+const highest = document.querySelector("#highest");
+const lowest = document.querySelector("#lowest");
+const first = document.querySelector("#first");
+const last = document.querySelector("#last");
+const id = document.querySelector("#id");
+
+const ordered_list_element = document.querySelector(".list_of_students");
+
+function showStudents() {
+  //ACCESS LOCAL STORAGE
+  let students = localStorage.getItem("students");
+  if (students === null) {
+    studentsArray = [];
+  } else {
+    studentsArray = JSON.parse(students);
+  }
+
+  //DISPLAY CONTENT ON SCREEN
+  let html = "";
+  studentsArray.forEach(function (element, index) {
+    html += `
+      <li>
+        <span class="ss_id">${index + 1} </span>
+        <span class="ss_name">${
+          element.name.slice(0, 1).toUpperCase() +
+          element.name.slice(1).toLowerCase()
+        }</span>
+        <span class="ss_surname">${
+          element.surname.slice(0, 1).toUpperCase() +
+          element.surname.slice(1).toLowerCase()
+        }</span>
+        <span class="ss_average">${studentAverage()[index]}</span>
+      <li>
+    `;
+  });
+
+  if (studentsArray.length !== 0) {
+    ordered_list_element.innerHTML = html;
+  } else {
+    students_list_container.innerHTML = "No students registered";
+  }
+}
+
+showStudents();

@@ -59,12 +59,14 @@
             <button class="student_search_btn">Search</button>
           </div>
           <div class="student_search_result">
-            <img
-              src="./images/usuario.png"
-              alt="user icon"
-              width="100px"
-              height="100px"
-            />
+            <div class="user_image">
+              <img
+                src="./images/usuario.png"
+                alt="user icon"
+                width="100px"
+                height="100px"
+              />
+            </div>
             <div class="student_info">
               <span class="name_display"></span>
               <span class="surname_display"></span>
@@ -106,7 +108,15 @@
             <input type="radio" name="radio" id="id" />
           </div>
           <div class="list_display_container">
-            <ol class="list_of_students"></ol>
+            <table>
+              <tr>
+                <th class="ss_id">ID</th>
+                <th class="ss_name">FIRST NAME</th>
+                <th class="ss_surname">SURNAME</th>
+                <th class="ss_average">AVERAGE GRADE</th>
+              </tr>
+            </table>
+            <ul class="list_of_students"></ul>
           </div>
         </section>
       </main>

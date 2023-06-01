@@ -167,3 +167,31 @@ input {
   flex-direction: column;
   margin: 10px;
 }
+
+/* GRADES DISPLAY */
+li {
+  list-style: none;
+}
+
+table {
+  width: 100%;
+  height: 40px;
+}
+
+th {
+  background-color: var(--bg-left-color);
+  color: black;
+}
+.ss_id {
+  width: 10%;
+}
+.ss_name,
+.ss_surname,
+.ss_average {
+  width: 29%;
+}
+
+span {
+  display: inline-block;
+  text-align: center;
+}
