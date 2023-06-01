@@ -71,18 +71,21 @@ function search(e) {
   //Accessing local storage
   const studentFound = studentsArray.find((student) => {
     let fullInputName = student_search_input.value.toLowerCase();
+    console.log(fullInputName);
     let fullName = `${student.name} ${student.surname}`;
     if (fullName === fullInputName) {
       user_image.innerHTML = `<img src="./images/${student.name}.jpeg" width="100px">`;
-      language_arts_grade.value = student.subjects.language_arts;
-      maths_grade.value = student.subjects.maths;
-      p_e_grade.value = student.subjects.p_e;
-      science_grade.value = student.subjects.science;
-      spanish_grade.value = student.subjects.spanish;
+
+      // language_arts_grade.value = student.subjects.language_arts;
+      // maths_grade.value = student.subjects.maths;
+      // p_e_grade.value = student.subjects.p_e;
+      // science_grade.value = student.subjects.science;
+      // spanish_grade.value = student.subjects.spanish;
 
       return student;
     }
   });
+  console.log(studentFound);
   let name = document.querySelector(".name_display");
   let surname = document.querySelector(".surname_display");
   let age = document.querySelector(".age_display");
@@ -209,7 +212,7 @@ function showStudents() {
   if (studentsArray.length !== 0) {
     ordered_list_element.innerHTML = html;
   } else {
-    students_list_container.innerHTML = "No students registered";
+    students_list_container.innerText = "No students registered";
   }
 }
 
