@@ -41,14 +41,15 @@ function enroll(e) {
   }
 
   const student = new Student(
-    student_name.value.toLowerCase(),
-    student_surname.value.toLowerCase(),
-    student_age.value.toLowerCase()
+    student_name.value.toLowerCase().trim(),
+    student_surname.value.toLowerCase().trim(),
+    student_age.value
   );
 
   studentsArray.push(student);
   localStorage.setItem("students", JSON.stringify(studentsArray));
   enrollment_form.reset();
+  showStudents();
 }
 
 //* * * * * Search a student by its name * * * * *
@@ -70,7 +71,7 @@ function search(e) {
   }
   //Accessing local storage
   const studentFound = studentsArray.find((student) => {
-    let fullInputName = student_search_input.value.toLowerCase();
+    let fullInputName = student_search_input.value.toLowerCase().trim();
     console.log(fullInputName);
     let fullName = `${student.name} ${student.surname}`;
     if (fullName === fullInputName) {
@@ -145,6 +146,7 @@ function uploadGrades(e) {
   //Cleaning grades form
   let student_grades_form = document.querySelector("#student_grades");
   student_grades_form.reset();
+  showStudents();
 }
 
 //* * * * * Getting SS AVERAGE & storing them into an array* * * * *
@@ -166,7 +168,11 @@ const studentAverage = () => {
         total += student.subjects[classes];
       }
     }
-    return total / clases_total;
+    let result = total / clases_total;
+    if (isNaN(result)) {
+      return 0;
+    }
+    return result;
   });
   return average_grades;
 };
@@ -212,7 +218,7 @@ function showStudents() {
   if (studentsArray.length !== 0) {
     ordered_list_element.innerHTML = html;
   } else {
-    students_list_container.innerText = "No students registered";
+    ordered_list_element.innerHTML = "No students registered";
   }
 }
 
