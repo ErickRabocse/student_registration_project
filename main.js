@@ -117,7 +117,6 @@ upload_grades_btn.addEventListener("click", uploadGrades);
 
 //* * * * * Display list of students * * * * *
 const ordered_list_element = document.querySelector(".list_of_students");
-showStudents();
 
 function uploadGrades(e) {
   e.preventDefault();
@@ -187,7 +186,6 @@ const studentAverage = () => {
   return average_grades;
 };
 studentAverage();
-
 //* * * * * Display list of students * * * * *
 
 function showStudents() {
