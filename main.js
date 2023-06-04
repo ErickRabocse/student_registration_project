@@ -19,35 +19,6 @@ class Subjects_Grades {
   }
 }
 
-//* * * * * Getting SS AVERAGE & storing them into an array* * * * *
-const studentAverage = () => {
-  //ACCESSING LOCAL STORAGE
-  let students = localStorage.getItem("students");
-  if (students === null) {
-    studentsArray = [];
-  } else {
-    studentsArray = JSON.parse(students);
-  }
-  //RETURNNING THE AVERAGE FOR THE SS SELECTED
-  const average_grades = studentsArray.map(function (student) {
-    let total = 0;
-    let clases_total = 0;
-    if (student.subjects) {
-      for (let classes in student.subjects) {
-        clases_total++;
-        total += student.subjects[classes];
-      }
-    }
-    let result = total / clases_total;
-    if (isNaN(result)) {
-      return 0;
-    }
-    return result;
-  });
-  return average_grades;
-};
-studentAverage();
-
 //SELECTING USER REGISTRATION DATA
 const enrollment_form = document.querySelector("#enrollment_form");
 const student_name = document.querySelector("#student_name");
@@ -73,9 +44,7 @@ function enroll(e) {
   const student = new Student(
     student_name.value.toLowerCase().trim(),
     student_surname.value.toLowerCase().trim(),
-    student_age.value,
-    null,
-    null
+    student_age.value
   );
 
   studentsArray.push(student);
@@ -146,6 +115,10 @@ const upload_grades_btn = document.querySelector(".upload_grades_btn");
 
 upload_grades_btn.addEventListener("click", uploadGrades);
 
+//* * * * * Display list of students * * * * *
+const ordered_list_element = document.querySelector(".list_of_students");
+showStudents();
+
 function uploadGrades(e) {
   e.preventDefault();
   //GETTING USERS FROM LOCAL STORAGE
@@ -181,8 +154,41 @@ function uploadGrades(e) {
   showStudents();
 }
 
+//* * * * * Getting SS AVERAGE & storing them into an array* * * * *
+const studentAverage = () => {
+  //ACCESSING LOCAL STORAGE
+  let students = localStorage.getItem("students");
+  if (students === null) {
+    studentsArray = [];
+  } else {
+    studentsArray = JSON.parse(students);
+  }
+  //RETURNNING THE AVERAGE FOR THE SS SELECTED
+  const average_grades = studentsArray.map(function (student, index) {
+    let total = 0;
+    let clases_total = 0;
+    if (student.subjects) {
+      for (let classes in student.subjects) {
+        clases_total++;
+        total += student.subjects[classes];
+      }
+    }
+    let result = total / clases_total;
+    // if (isNaN(result)) {
+    if (result == null || isNaN(result)) {
+      return 0;
+    }
+    student.average = result;
+    return result;
+  });
+  console.log("this is a student outside: ", students);
+  localStorage.setItem("students", JSON.stringify(studentsArray));
+  showStudents();
+  return average_grades;
+};
+studentAverage();
+
 //* * * * * Display list of students * * * * *
-const ordered_list_element = document.querySelector(".list_of_students");
 
 function showStudents() {
   //ACCESS LOCAL STORAGE
@@ -192,6 +198,8 @@ function showStudents() {
   } else {
     studentsArray = JSON.parse(students);
   }
+
+  console.log("students: ", students);
 
   //DISPLAY CONTENT ON SCREEN
   let html = "";
@@ -207,7 +215,7 @@ function showStudents() {
           element.surname.slice(0, 1).toUpperCase() +
           element.surname.slice(1).toLowerCase()
         }</span>
-        <span class="ss_average">${studentAverage()[index]}</span>
+        <span class="ss_average">${element.average}</span>
       <li>
     `;
   });
