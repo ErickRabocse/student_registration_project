@@ -1,10 +1,11 @@
 //CLASS STUDENT
 class Student {
-  constructor(name, surname, age, subjects) {
+  constructor(name, surname, age, subjects, average) {
     this.name = name;
     this.surname = surname;
     this.age = age;
     this.subjects = subjects;
+    this.average = average;
   }
 }
 
@@ -179,12 +180,6 @@ const studentAverage = () => {
 studentAverage();
 
 //* * * * * Display list of students * * * * *
-const highest = document.querySelector("#highest");
-const lowest = document.querySelector("#lowest");
-const first = document.querySelector("#first");
-const last = document.querySelector("#last");
-const id = document.querySelector("#id");
-
 const ordered_list_element = document.querySelector(".list_of_students");
 
 function showStudents() {
@@ -221,5 +216,12 @@ function showStudents() {
     ordered_list_element.innerHTML = "No students registered";
   }
 }
-
 showStudents();
+
+function orderStudents() {
+  const highest = document.querySelector("#highest");
+  const lowest = document.querySelector("#lowest");
+  const first = document.querySelector("#first");
+  const last = document.querySelector("#last");
+  const id = document.querySelector("#id");
+}
