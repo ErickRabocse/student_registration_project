@@ -13,6 +13,7 @@
   --bg-right-color: rgba(55, 72, 79, 0.109);
   --h-color: rgb(33, 187, 213);
   --bg-body-color: rgba(233, 79, 202, 0.194);
+  --bg-left-dark-color: rgba(55, 72, 79, 0.15);
 }
 /* COLORS */
 .school_logo,
@@ -71,7 +72,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--bg-right-color);
+  background-color: var(--bg-left-dark-color);
 }
 
 .student_grading {
