@@ -200,7 +200,7 @@ function showStudents() {
   }
   //DISPLAY CONTENT ON SCREEN
   let html = "";
-  const listFilledElement = studentsArray.map(function (element) {
+  studentsArray.map(function (element) {
     html += `
       <li>
         <span class="ss_id">${element.id} </span>
@@ -222,43 +222,74 @@ function showStudents() {
   } else {
     ordered_list_element.innerHTML = "No students registered";
   }
+  localStorage.setItem("students", JSON.stringify(studentsArray));
 }
 
 function cleanView() {
   ordered_list_element.innerHTML = "";
 }
 
-//CREATING AN ARRAY OF INPUT RADIO BUTTONS WITH THE NAME "RADIO"
-// let radioBtns = document.querySelectorAll("input[name=radio]");
-// console.log(radioBtns);
-// radioBtns.forEach((rb) =>
-//   rb.addEventListener("change", function () {
-//     if (rb.id == "highest") {
-//       console.log("highest selected");
-//     } else if (rb.id == "lowest") {
-//       console.log("lowest selected");
-//     } else if (rb.id == "first") {
-//       console.log("first selected");
-//       orderStudents();
-//     } else if (rb.id == "last") {
-//       console.log("last selected");
-//     } else if (rb.id == "id") {
-//       console.log("id selected");
-//     }
-//   })
-// );
+function orderStudents() {
+  //ACCESS LOCAL STORAGE
+  let students = localStorage.getItem("students");
+  if (students === null) {
+    studentsArray = [];
+  } else {
+    studentsArray = JSON.parse(students);
+  }
 
-// function orderStudents() {
-//   //ACCESS LOCAL STORAGE
-//   let students = localStorage.getItem("students");
-//   if (students === null) {
-//     studentsArray = [];
-//   } else {
-//     studentsArray = JSON.parse(students);
-//   }
+  console.log("ok: ", studentsArray);
 
-//   console.log("ok: ", studentsArray);
+  //CREATING AN ARRAY OF INPUT RADIO BUTTONS WITH THE NAME "RADIO"
+  let radioBtns = document.querySelectorAll("input[name=radio]");
+  console.log(radioBtns);
+  radioBtns.forEach((rb) =>
+    rb.addEventListener("change", function () {
+      if (rb.id == "highest") {
+        //SORTING BY HIGHESTAVERAGE NAME
+        studentsArray.sort(function (a, b) {
+          return b.average - a.average;
+        });
+        localStorage.setItem("students", JSON.stringify(studentsArray));
+        showStudents();
+      } else if (rb.id == "lowest") {
+        //SORTING BY LOWEST AVERAGE NAME
+        studentsArray.sort(function (a, b) {
+          return a.average - b.average;
+        });
+        localStorage.setItem("students", JSON.stringify(studentsArray));
+        showStudents();
+        return;
+      } else if (rb.id == "first") {
+        //SORTING BY FIRST NAME
+        studentsArray.sort(function (a, b) {
+          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+          if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+          return 0;
+        });
+        localStorage.setItem("students", JSON.stringify(studentsArray));
+        showStudents();
+        return;
+      } else if (rb.id == "last") {
+        //SORTING BY LAST NAME
+        studentsArray.sort(function (a, b) {
+          if (a.surname.toLowerCase() < b.surname.toLowerCase()) return -1;
+          if (a.surname.toLowerCase() > b.surname.toLowerCase()) return 1;
+          return 0;
+        });
+        localStorage.setItem("students", JSON.stringify(studentsArray));
+        showStudents();
+      } else if (rb.id == "id") {
+        //SORTING BY ID NAME
+        studentsArray.sort(function (a, b) {
+          return a.id - b.id;
+        });
+        localStorage.setItem("students", JSON.stringify(studentsArray));
+        showStudents();
+      }
+    })
+  );
 
-//   //SORTING LOGIC
-// }
-// orderStudents();
+  localStorage.setItem("students", JSON.stringify(studentsArray));
+}
+orderStudents();
