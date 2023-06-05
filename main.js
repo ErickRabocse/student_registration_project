@@ -218,21 +218,6 @@ function showStudents() {
       <td>${element.average}</td>
 `;
 
-    //   `
-    //    <li>
-    //     <span class="ss_id">${index + 1} </span>
-    //     <span class="ss_name">${
-    //       element.name.slice(0, 1).toUpperCase() +
-    //       element.name.slice(1).toLowerCase()
-    //     }</span>
-    //     <span class="ss_surname">${
-    //       element.surname.slice(0, 1).toUpperCase() +
-    //       element.surname.slice(1).toLowerCase()
-    //     }</span>
-    //     <span class="ss_average">${element.average}</span>
-    //   <li>
-    // `
-
     if (studentsArray.length !== 0) {
       ordered_list_element.innerHTML += row;
     } else {
@@ -253,6 +238,16 @@ function orderStudents() {
   // const last = document.querySelector("#last");
   // const id = document.querySelector("#id");
 
+  //ACCESS LOCAL STORAGE
+  let students = localStorage.getItem("students");
+  if (students === null) {
+    studentsArray = [];
+  } else {
+    studentsArray = JSON.parse(students);
+  }
+
+  console.log("ok: ", studentsArray);
+
   //CREATING AN ARRAY OF INPUT RADIO BUTTONS WITH THE NAME "RADIO"
   let radioBtns = document.querySelectorAll("input[name=radio]");
   console.log(radioBtns);
@@ -260,6 +255,10 @@ function orderStudents() {
     rb.addEventListener("change", function () {
       if (rb.id == "highest") {
         console.log("highest selected");
+        studentsArray = studentsArray.sort((a, b) => {
+          console.log("THIS IS A AVERAGE before: ", a.name, " ", a.average);
+          a[column] > b[column] ? 1 : -1;
+        });
       } else if (rb.id == "lowest") {
         console.log("lowest selected");
       } else if (rb.id == "first") {
