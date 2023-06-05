@@ -1,9 +1,9 @@
 //CLASS STUDENT
 class Student {
-  constructor(name, surname, age, subjects, average) {
+  constructor(name, surname, id, subjects, average) {
     this.name = name;
     this.surname = surname;
-    this.age = age;
+    this.id = id;
     this.subjects = subjects;
     this.average = average;
   }
@@ -23,7 +23,7 @@ class Subjects_Grades {
 const enrollment_form = document.querySelector("#enrollment_form");
 const student_name = document.querySelector("#student_name");
 const student_surname = document.querySelector("#student_surname");
-const student_age = document.querySelector("#student_age");
+const id = document.querySelector("#student_id");
 const enroll_btn = document.querySelector(".student_enrollment_btn");
 
 //SELECTING USER GRADES DATA
@@ -44,13 +44,12 @@ function enroll(e) {
   const student = new Student(
     student_name.value.toLowerCase().trim(),
     student_surname.value.toLowerCase().trim(),
-    student_age.value
+    student_id.value
   );
 
   studentsArray.push(student);
   localStorage.setItem("students", JSON.stringify(studentsArray));
   enrollment_form.reset();
-  cleanView();
   showStudents();
 }
 
@@ -89,13 +88,13 @@ function search(e) {
   });
   let name = document.querySelector(".name_display");
   let surname = document.querySelector(".surname_display");
-  let age = document.querySelector(".age_display");
+  let id = document.querySelector(".id_display");
   name.innerText =
     studentFound.name.slice(0, 1).toUpperCase() + studentFound.name.slice(1);
   surname.innerText =
     studentFound.surname.slice(0, 1).toUpperCase() +
     studentFound.surname.slice(1);
-  age.innerText = `${studentFound.age} years old`;
+  id.innerText = `${studentFound.id} years old`;
 
   student_search_input.value = "";
 
@@ -149,7 +148,6 @@ function uploadGrades(e) {
   //Cleaning grades form
   let student_grades_form = document.querySelector("#student_grades");
   student_grades_form.reset();
-  cleanView();
   showStudents();
 }
 
@@ -184,14 +182,15 @@ const studentAverage = () => {
     return result;
   });
   localStorage.setItem("students", JSON.stringify(studentsArray));
-  cleanView();
   showStudents();
   // return average_grades;
 };
 studentAverage();
-//* * * * * Display list of students * * * * *
 
+//* * * * * Display list of students * * * * *
 function showStudents() {
+  cleanView();
+
   //ACCESS LOCAL STORAGE
   let students = localStorage.getItem("students");
   if (students === null) {
@@ -201,10 +200,10 @@ function showStudents() {
   }
   //DISPLAY CONTENT ON SCREEN
   let html = "";
-  studentsArray.forEach(function (element, index) {
+  const listFilledElement = studentsArray.map(function (element) {
     html += `
       <li>
-        <span class="ss_id">${index + 1} </span>
+        <span class="ss_id">${element.id} </span>
         <span class="ss_name">${
           element.name.slice(0, 1).toUpperCase() +
           element.name.slice(1).toLowerCase()
@@ -223,17 +222,43 @@ function showStudents() {
   } else {
     ordered_list_element.innerHTML = "No students registered";
   }
-  console.log("Array of students: ", students);
 }
 
 function cleanView() {
   ordered_list_element.innerHTML = "";
 }
 
-function orderStudents() {
-  const highest = document.querySelector("#highest");
-  const lowest = document.querySelector("#lowest");
-  const first = document.querySelector("#first");
-  const last = document.querySelector("#last");
-  const id = document.querySelector("#id");
-}
+//CREATING AN ARRAY OF INPUT RADIO BUTTONS WITH THE NAME "RADIO"
+// let radioBtns = document.querySelectorAll("input[name=radio]");
+// console.log(radioBtns);
+// radioBtns.forEach((rb) =>
+//   rb.addEventListener("change", function () {
+//     if (rb.id == "highest") {
+//       console.log("highest selected");
+//     } else if (rb.id == "lowest") {
+//       console.log("lowest selected");
+//     } else if (rb.id == "first") {
+//       console.log("first selected");
+//       orderStudents();
+//     } else if (rb.id == "last") {
+//       console.log("last selected");
+//     } else if (rb.id == "id") {
+//       console.log("id selected");
+//     }
+//   })
+// );
+
+// function orderStudents() {
+//   //ACCESS LOCAL STORAGE
+//   let students = localStorage.getItem("students");
+//   if (students === null) {
+//     studentsArray = [];
+//   } else {
+//     studentsArray = JSON.parse(students);
+//   }
+
+//   console.log("ok: ", studentsArray);
+
+//   //SORTING LOGIC
+// }
+// orderStudents();
