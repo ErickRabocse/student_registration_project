@@ -50,6 +50,7 @@ function enroll(e) {
   studentsArray.push(student);
   localStorage.setItem("students", JSON.stringify(studentsArray));
   enrollment_form.reset();
+  cleanView();
   showStudents();
 }
 
@@ -73,7 +74,6 @@ function search(e) {
   //Accessing local storage
   const studentFound = studentsArray.find((student) => {
     let fullInputName = student_search_input.value.toLowerCase().trim();
-    console.log(fullInputName);
     let fullName = `${student.name} ${student.surname}`;
     if (fullName === fullInputName) {
       user_image.innerHTML = `<img src="./images/${student.name}.jpeg" width="100px">`;
@@ -87,7 +87,6 @@ function search(e) {
       return student;
     }
   });
-  console.log(studentFound);
   let name = document.querySelector(".name_display");
   let surname = document.querySelector(".surname_display");
   let age = document.querySelector(".age_display");
@@ -150,6 +149,7 @@ function uploadGrades(e) {
   //Cleaning grades form
   let student_grades_form = document.querySelector("#student_grades");
   student_grades_form.reset();
+  cleanView();
   showStudents();
 }
 
@@ -163,10 +163,14 @@ const studentAverage = () => {
     studentsArray = JSON.parse(students);
   }
   //RETURNNING THE AVERAGE FOR THE SS SELECTED
-  const average_grades = studentsArray.map(function (student, index) {
+  // const average_grades = studentsArray.map(function (student, index) {
+  studentsArray.map(function (student) {
     let total = 0;
     let clases_total = 0;
-    if (student.subjects) {
+    if (!student.subjects) {
+      student.average = 0;
+      return;
+    } else {
       for (let classes in student.subjects) {
         clases_total++;
         total += student.subjects[classes];
@@ -174,16 +178,15 @@ const studentAverage = () => {
     }
     let result = total / clases_total;
     // if (isNaN(result)) {
-    if (result == null || isNaN(result)) {
-      return 0;
-    }
+    //   return 0;
+    // }
     student.average = result;
     return result;
   });
-  console.log("this is a student outside: ", students);
   localStorage.setItem("students", JSON.stringify(studentsArray));
+  cleanView();
   showStudents();
-  return average_grades;
+  // return average_grades;
 };
 studentAverage();
 //* * * * * Display list of students * * * * *
@@ -196,9 +199,6 @@ function showStudents() {
   } else {
     studentsArray = JSON.parse(students);
   }
-
-  console.log("students: ", students);
-
   //DISPLAY CONTENT ON SCREEN
   let html = "";
   studentsArray.forEach(function (element, index) {
@@ -223,8 +223,12 @@ function showStudents() {
   } else {
     ordered_list_element.innerHTML = "No students registered";
   }
+  console.log("Array of students: ", students);
 }
-showStudents();
+
+function cleanView() {
+  ordered_list_element.innerHTML = "";
+}
 
 function orderStudents() {
   const highest = document.querySelector("#highest");
