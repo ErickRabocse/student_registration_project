@@ -189,8 +189,8 @@ const studentAverage = () => {
   // return average_grades;
 };
 studentAverage();
-//* * * * * Display list of students * * * * *
 
+//* * * * * Display list of students * * * * *
 function showStudents() {
   //ACCESS LOCAL STORAGE
   let students = localStorage.getItem("students");
@@ -200,31 +200,30 @@ function showStudents() {
     studentsArray = JSON.parse(students);
   }
   //DISPLAY CONTENT ON SCREEN
-  // let html = "";
+  let html = "";
   studentsArray.forEach(function (element, index) {
-    let row = `
-    <tr>
-      <td>${index + 1}</td>
-      <td>${
-        element.name.slice(0, 1).toUpperCase() +
-        element.name.slice(1).toLowerCase()
-      }</td>
-      <td>
-      ${
-        element.surname.slice(0, 1).toUpperCase() +
-        element.surname.slice(1).toLowerCase()
-      }
-      </td>
-      <td>${element.average}</td>
-`;
-
-    if (studentsArray.length !== 0) {
-      ordered_list_element.innerHTML += row;
-    } else {
-      ordered_list_element.innerHTML = "No students registered";
-    }
-    console.log("Array of students: ", students);
+    html += `
+      <li>
+        <span class="ss_id">${index + 1} </span>
+        <span class="ss_name">${
+          element.name.slice(0, 1).toUpperCase() +
+          element.name.slice(1).toLowerCase()
+        }</span>
+        <span class="ss_surname">${
+          element.surname.slice(0, 1).toUpperCase() +
+          element.surname.slice(1).toLowerCase()
+        }</span>
+        <span class="ss_average">${element.average}</span>
+      <li>
+    `;
   });
+
+  if (studentsArray.length !== 0) {
+    ordered_list_element.innerHTML = html;
+  } else {
+    ordered_list_element.innerHTML = "No students registered";
+  }
+  console.log("Array of students: ", students);
 }
 
 function cleanView() {
