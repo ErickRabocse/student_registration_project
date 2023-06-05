@@ -200,30 +200,46 @@ function showStudents() {
     studentsArray = JSON.parse(students);
   }
   //DISPLAY CONTENT ON SCREEN
-  let html = "";
+  // let html = "";
   studentsArray.forEach(function (element, index) {
-    html += `
-      <li>
-        <span class="ss_id">${index + 1} </span>
-        <span class="ss_name">${
-          element.name.slice(0, 1).toUpperCase() +
-          element.name.slice(1).toLowerCase()
-        }</span>
-        <span class="ss_surname">${
-          element.surname.slice(0, 1).toUpperCase() +
-          element.surname.slice(1).toLowerCase()
-        }</span>
-        <span class="ss_average">${element.average}</span>
-      <li>
-    `;
-  });
+    let row = `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${
+        element.name.slice(0, 1).toUpperCase() +
+        element.name.slice(1).toLowerCase()
+      }</td>
+      <td>
+      ${
+        element.surname.slice(0, 1).toUpperCase() +
+        element.surname.slice(1).toLowerCase()
+      }
+      </td>
+      <td>${element.average}</td>
+`;
 
-  if (studentsArray.length !== 0) {
-    ordered_list_element.innerHTML = html;
-  } else {
-    ordered_list_element.innerHTML = "No students registered";
-  }
-  console.log("Array of students: ", students);
+    //   `
+    //    <li>
+    //     <span class="ss_id">${index + 1} </span>
+    //     <span class="ss_name">${
+    //       element.name.slice(0, 1).toUpperCase() +
+    //       element.name.slice(1).toLowerCase()
+    //     }</span>
+    //     <span class="ss_surname">${
+    //       element.surname.slice(0, 1).toUpperCase() +
+    //       element.surname.slice(1).toLowerCase()
+    //     }</span>
+    //     <span class="ss_average">${element.average}</span>
+    //   <li>
+    // `
+
+    if (studentsArray.length !== 0) {
+      ordered_list_element.innerHTML += row;
+    } else {
+      ordered_list_element.innerHTML = "No students registered";
+    }
+    console.log("Array of students: ", students);
+  });
 }
 
 function cleanView() {
@@ -231,9 +247,29 @@ function cleanView() {
 }
 
 function orderStudents() {
-  const highest = document.querySelector("#highest");
-  const lowest = document.querySelector("#lowest");
-  const first = document.querySelector("#first");
-  const last = document.querySelector("#last");
-  const id = document.querySelector("#id");
+  // const highest = document.querySelector("#highest");
+  // const lowest = document.querySelector("#lowest");
+  // const first = document.querySelector("#first");
+  // const last = document.querySelector("#last");
+  // const id = document.querySelector("#id");
+
+  //CREATING AN ARRAY OF INPUT RADIO BUTTONS WITH THE NAME "RADIO"
+  let radioBtns = document.querySelectorAll("input[name=radio]");
+  console.log(radioBtns);
+  radioBtns.forEach((rb) =>
+    rb.addEventListener("change", function () {
+      if (rb.id == "highest") {
+        console.log("highest selected");
+      } else if (rb.id == "lowest") {
+        console.log("lowest selected");
+      } else if (rb.id == "first") {
+        console.log("first selected");
+      } else if (rb.id == "last") {
+        console.log("last selected");
+      } else if (rb.id == "id") {
+        console.log("id selected");
+      }
+    })
+  );
 }
+orderStudents();
