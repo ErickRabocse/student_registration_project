@@ -148,6 +148,8 @@ function uploadGrades(e) {
   //Cleaning grades form
   let student_grades_form = document.querySelector("#student_grades");
   student_grades_form.reset();
+  // Refresh the page
+  location.reload();
   showStudents();
 }
 
