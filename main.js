@@ -94,7 +94,7 @@ function search(e) {
   surname.innerText =
     studentFound.surname.slice(0, 1).toUpperCase() +
     studentFound.surname.slice(1);
-  id.innerText = `${studentFound.id} years old`;
+  id.innerText = `ID: ${studentFound.id}`;
 
   student_search_input.value = "";
 
